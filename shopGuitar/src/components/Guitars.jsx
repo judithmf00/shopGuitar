@@ -12,24 +12,25 @@ export default function Guitars() {
 
     function increaseQuantity(guitar) {
         const itemExists = cart.findIndex((item)=>item.id === guitar.id)
-        const copiaCart =[...cart]
-        if (copiaCart[itemExists].quantity<5) {
-           copiaCart[itemExists].quantity++ 
+        const cartCopy =[...cart]
+        if (cartCopy[itemExists].quantity < 5) {
+           cartCopy[itemExists].quantity++ 
         }
-        setCart(copiaCart)
+        setCart(cartCopy)
     }
 
     function decreaseQuantity(guitar) {
         const itemExists = cart.findIndex((item)=>item.id === guitar.id)
-        const copiaCart =[...cart]
-        if (copiaCart[itemExists].quantity > 1) {
-           copiaCart[itemExists].quantity-- 
+        const cartCopy =[...cart]
+
+        if (cartCopy[itemExists].quantity > 1) {
+           cartCopy[itemExists].quantity-- 
         }
         
-        setCart(copiaCart)
+        setCart(cartCopy)
     }
 
-    function deleteItem(guitar) {
+    function removeItem(guitar) {
         setCart(cart.filter((item)=>item.id != guitar.id))
     }
 
@@ -97,7 +98,7 @@ export default function Guitars() {
                                                     <button
                                                         className="btn btn-danger"
                                                         type="button"
-                                                        onClick={()=>deleteItem(guitar)}
+                                                        onClick={()=>removeItem(guitar)}
                                                     >
                                                         X
                                                     </button>
@@ -109,8 +110,6 @@ export default function Guitars() {
                             <p className="text-end">Total pagar: <span className="fw-bold"></span>{cartTotal}€</p>
                         </>
                     } 
-                    
-                    
                 </div>
             </section>
         </main>

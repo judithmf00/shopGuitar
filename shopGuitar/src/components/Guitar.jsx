@@ -2,16 +2,16 @@ import { useEffect, useState } from "react"
 
 export default function Guitar({guitar,setCart,cart}) {
     const{id,name,image,description,price} = guitar
-    const [comprado,setComprado] = useState(false)
+    const [bought,setBought] = useState(false)
 
     useEffect(()=>{
         //Tenemos que añadirlo al local storage cada vez que cambie el carrito
-        saveLocalStorage()
+        saveToLocalStorage()
     },[cart])
 
-    function addCart(id) {
+    function addToCart(id) {
         //Marcar que esta comprado para cambiar de icono
-        setComprado(true)
+        setBought(true)
 
         // Comprobar que el elemento no esta en el Array, si está, agragamos uno a la cantidad
         const itemExists = cart.findIndex((guitar)=>guitar.id === id)
@@ -29,7 +29,7 @@ export default function Guitar({guitar,setCart,cart}) {
         
     }
 
-    function saveLocalStorage() {
+    function saveToLocalStorage() {
         //Grabar en el localStorage el carrito
         localStorage.setItem('carrito',JSON.stringify(cart))
     }
@@ -49,8 +49,8 @@ export default function Guitar({guitar,setCart,cart}) {
                     <p className="price m-0">{price}€</p> 
                 </div>
                 
-                <button onClick={()=>addCart(id)}>
-                    {comprado ?
+                <button onClick={()=>addToCart(id)}>
+                    {bought ?
                             <img src="/img/add.png" alt="Agregar al carrito" />
                         :
                             <img src="/img/carrito.png" alt="Comprar" />
