@@ -1,8 +1,13 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function Guitar({guitar,setCart,cart}) {
     const{id,name,image,description,price} = guitar
     const [comprado,setComprado] = useState(false)
+
+    useEffect(()=>{
+        //Tenemos que añadirlo al local storage cada vez que cambie el carrito
+        saveLocalStorage()
+    },[cart])
 
     function addCart(id) {
         //Marcar que esta comprado para cambiar de icono
@@ -21,9 +26,12 @@ export default function Guitar({guitar,setCart,cart}) {
             guitar.quantity=1
             setCart([...cart,guitar]) // Crea un nuevo array que contiene todos los elementos del array cart original, seguido por el nuevo elemento guitar 
         }
-
-        //Grabar en el localStorage el carrito
         
+    }
+
+    function saveLocalStorage() {
+        //Grabar en el localStorage el carrito
+        localStorage.setItem('carrito',JSON.stringify(cart))
     }
 
     return(
